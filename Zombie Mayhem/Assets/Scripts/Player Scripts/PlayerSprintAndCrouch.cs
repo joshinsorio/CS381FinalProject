@@ -19,6 +19,11 @@ public class PlayerSprintAndCrouch : MonoBehaviour
     private float m_sprintStepDistance = 0.25f;
     private float m_crouchStepDistance = 0.5f;
 
+    private PlayerStats m_player_Stats;
+
+    private float m_sprint_Value = 100f;
+    public float m_sprint_Threshold = 10f;
+
 
     // Awake is called before the first frame update
     void Awake()
@@ -26,6 +31,7 @@ public class PlayerSprintAndCrouch : MonoBehaviour
         m_playerMovement = GetComponent<PlayerMovement>();
         m_playerFootsteps = GetComponentInChildren<PlayerFootsteps>();
         m_lookRoot = transform.GetChild(0);
+        m_player_Stats = GetComponent<PlayerStats>();
     }
 
     // Start is called before the first frame update
@@ -45,13 +51,18 @@ public class PlayerSprintAndCrouch : MonoBehaviour
 
     void Sprint()
     {
-        if(Input.GetKeyDown(KeyCode.LeftShift))
+
+        if(m_sprint_Value > 0f)
         {
-            m_playerMovement.m_speed = m_sprintSpeed;
-            m_playerFootsteps.m_stepDistance = m_sprintStepDistance;
-            m_playerFootsteps.m_volumeMin = m_sprintVol;
-            m_playerFootsteps.m_volumeMax = m_sprintVol;
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                m_playerMovement.m_speed = m_sprintSpeed;
+                m_playerFootsteps.m_stepDistance = m_sprintStepDistance;
+                m_playerFootsteps.m_volumeMin = m_sprintVol;
+                m_playerFootsteps.m_volumeMax = m_sprintVol;    
+            }
         }
+      
 
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
@@ -60,7 +71,36 @@ public class PlayerSprintAndCrouch : MonoBehaviour
             m_playerFootsteps.m_volumeMin = m_walkVolMin;
             m_playerFootsteps.m_volumeMax = m_walkVolMax;
         }
-    }
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            m_sprint_Value -= m_sprint_Threshold * Time.deltaTime;
+            if (m_sprint_Value <= 0f)
+            {
+                m_sprint_Value = 0f;
+                m_playerMovement.m_speed = m_moveSpeed;
+                m_playerFootsteps.m_stepDistance = m_walkStepDistance;
+                m_playerFootsteps.m_volumeMin = m_walkVolMin;
+                m_playerFootsteps.m_volumeMax = m_walkVolMax;
+            }
+
+            m_player_Stats.Display_StaminaStats(m_sprint_Value);
+        }
+        else
+        {
+            if (m_sprint_Value != 100f)
+            {
+                m_sprint_Value += (m_sprint_Threshold / 2f) * Time.deltaTime;
+                m_player_Stats.Display_StaminaStats(m_sprint_Value);
+                    if (m_sprint_Value > 100f)
+                {
+                    m_sprint_Value = 100f;
+                }
+
+            }
+        }
+        }
+   
 
     void Crouch()
     {

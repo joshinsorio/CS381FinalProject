@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: 4ba252652689c7446b1ba35fb7d46d4f
+  - enabled: 1
+    path: Assets/Scenes/ZombieMayhem.unity
+    guid: 2fa6791571ecd4d44933babd37c2db83
   m_configObjects: {}
