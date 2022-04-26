@@ -13,7 +13,7 @@ public class EnemyController : MonoBehaviour
 {
     private EnemyAnimator m_enemyAnim;
     private UnityEngine.AI.NavMeshAgent m_navAgent;
-    private EnemyState m_enemyState;
+    public EnemyState m_enemyState;
     public float m_walkSpeed = 0.5f;
     public float m_runSpeed = 4f;
     public float m_chaseDistance = 7f;
@@ -26,6 +26,7 @@ public class EnemyController : MonoBehaviour
     public float m_waitBeforeAttack = 2f;
     private float m_attackTimer;
     private Transform target;
+    public GameObject m_attackPoint;
 
     void Awake()
     {
@@ -167,4 +168,18 @@ public class EnemyController : MonoBehaviour
         UnityEngine.AI.NavMesh.SamplePosition(randDir, out navHit, rand_radius, -1);
         m_navAgent.SetDestination(navHit.position);
     }
+
+    void Turn_On_AttackPoint()
+    {
+        m_attackPoint.SetActive(true);
+    }
+
+    void Turn_Off_AttackPoint()
+    {
+        if (m_attackPoint.activeInHierarchy)
+        {
+            m_attackPoint.SetActive(false);
+        }
+    }
+
 }
