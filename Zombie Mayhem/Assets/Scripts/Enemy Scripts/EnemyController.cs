@@ -46,7 +46,7 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(m_enemyState == EnemyState.PATROL)
+        if (m_enemyState == EnemyState.PATROL)
         {
             Patrol();
         }
@@ -82,16 +82,77 @@ public class EnemyController : MonoBehaviour
         {
             m_enemyAnim.Walk(false);
         }
+
+        if (Vector3.Distance(transform.position, target.position) <= m_chaseDistance)
+        {
+            m_enemyAnim.Walk(false);
+
+            m_enemyState = EnemyState.CHASE;
+
+        }
     }
 
     void Chase()
     {
+        //Allow agent to move
+        m_navAgent.isStopped = false;
+        m_navAgent.speed = m_runSpeed;
+        m_navAgent.SetDestination(target.position);
 
+        if(m_navAgent.velocity.sqrMagnitude > 0)
+        {
+            m_enemyAnim.Chase(true);
+        }
+        else
+        {
+            m_enemyAnim.Chase(false);
+        }
+
+        //if within distance, attack
+        if(Vector3.Distance(transform.position, target.position) <= m_attackDistance)
+        {
+            m_enemyAnim.Chase(false);
+            m_enemyAnim.Walk(false);
+            m_enemyState = EnemyState.ATTACK;
+
+            if(m_chaseDistance != m_currentChaseDistance)
+            {
+                m_chaseDistance = m_currentChaseDistance;
+            }
+        }
+        else if (Vector3.Distance(transform.position, target.position) > m_chaseDistance)
+        {
+            m_enemyAnim.Chase(false);
+            m_enemyState = EnemyState.PATROL;
+
+            m_patrolTimer = m_patrolForThisTime;
+
+            if(m_chaseDistance != m_currentChaseDistance)
+            {
+                m_chaseDistance = m_currentChaseDistance;
+            }
+
+        }
+        
     }
 
     void Attack()
     {
+        m_navAgent.velocity = Vector3.zero;
+        m_navAgent.isStopped = true;
 
+        m_attackTimer += Time.deltaTime;
+
+        if(m_attackTimer > m_waitBeforeAttack)
+        {
+            m_enemyAnim.Attack();
+            m_attackTimer = 0f;
+        }
+
+        if(Vector3.Distance(transform.position, target.position) > m_attackDistance + m_chaseAfterAttackDistance)
+        {
+            m_enemyState = EnemyState.CHASE;
+        }
     }
 
     void SetNewRandomDestination()

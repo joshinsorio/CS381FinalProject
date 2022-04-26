@@ -28,14 +28,14 @@ public class EnemyAnimator : MonoBehaviour
         m_Anim.SetBool("Walk", walk);
     }
 
-    public void Run(bool run)
+    public void Chase(bool chase)
     {
-        m_Anim.SetBool("Run", run);
+        m_Anim.SetBool("Chase", chase);
     }
 
-    public void Attack(bool attack)
+    public void Attack()
     {
-        m_Anim.SetBool("Attack", attack);
+        m_Anim.SetTrigger("Attack");
     }
 
     public void Dead()
