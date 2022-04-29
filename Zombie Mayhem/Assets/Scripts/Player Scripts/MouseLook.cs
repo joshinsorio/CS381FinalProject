@@ -31,10 +31,10 @@ public class MouseLook : MonoBehaviour
     {
         CursorToggle();
 
-        if(Cursor.lockState == CursorLockMode.Locked)
-        {
-            LookAround();
-        }
+         if(Cursor.lockState == CursorLockMode.Locked)
+         {
+             LookAround();
+         }
     }
 
     void CursorToggle()
@@ -42,7 +42,7 @@ public class MouseLook : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if(Cursor.lockState == CursorLockMode.Locked)
-            {
+            { 
                 Cursor.lockState = CursorLockMode.None;
             }
 

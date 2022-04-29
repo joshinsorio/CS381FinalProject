@@ -77,6 +77,8 @@ public class HealthScript : MonoBehaviour
             m_navMeshAgent.isStopped = true;
             m_enemyController.enabled = false;
             m_enemyAnim.Dead();
+            KillCounter.instance.killCount++;
+            KillCounter.instance.UpdateKillCounterUI();
 
             //spawn more enemies
         }
