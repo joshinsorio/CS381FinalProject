@@ -7,6 +7,9 @@ TagManager:
   - Enemy
   - Axe
   - Crosshair
+  - Rifle
+  - Shotgun
+  - Pistol
   layers:
   - Default
   - TransparentFX

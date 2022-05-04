@@ -81,6 +81,7 @@ public class HealthScript : MonoBehaviour
             KillCounter.instance.UpdateKillCounterUI();
 
             //spawn more enemies
+            EnemyManager.m_instance.EnemyDied();
         }
 
         if (m_isPlayer)

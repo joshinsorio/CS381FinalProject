@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AttackScript : MonoBehaviour
 {
-    public float m_damage = 2f;
+    public float m_damage = 25f;
     public float m_radius = 1f;
     public LayerMask m_layerMask;
 
