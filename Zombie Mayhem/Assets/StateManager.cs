@@ -7,7 +7,7 @@ public class StateManager : MonoBehaviour
 {
     public void ReloadCurrentScene()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(1);
     }
 
     public void ChangeSceneByName(string name)

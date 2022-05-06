@@ -34,6 +34,13 @@ public class PauseMenu : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.R) && GameIsPaused)
         {
             SceneManager.LoadScene(1);
+            Time.timeScale = 1f;
+            GameIsPaused = false;
+        }
+        if (Input.GetKeyDown(KeyCode.M) && GameIsPaused)
+        {
+            SceneManager.LoadScene(0);
+            Time.timeScale = 1f;
         }
     }
 
