@@ -49,4 +49,9 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 0f;
         GameIsPaused = true;
     }
+
+    public void BacktoMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
 }

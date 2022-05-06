@@ -88,8 +88,8 @@ public class HealthScript : MonoBehaviour
         {
             //stop all enemies
             GameObject[] m_enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-            for(int i = 0; i < m_enemies.Length; i++)
+            
+            for (int i = 0; i < m_enemies.Length; i++)
             {
                 m_enemies[i].GetComponent<EnemyController>().enabled = false;
             }
@@ -102,7 +102,12 @@ public class HealthScript : MonoBehaviour
 
         if(tag == "Player")
         {
-            Invoke("RestartGame", 3f);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            LevelManager.instance.GameOver();
+            gameObject.SetActive(false);
+            Time.timeScale = 0f;
+            //Invoke("RestartGame", 3f);
         }
         else
         {

@@ -8,6 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main Menu.unity
     guid: 4ba252652689c7446b1ba35fb7d46d4f
+  - enabled: 0
+    path: Assets/Scenes/MainMenu2.unity
+    guid: bf1b9e53c3fcbd64082a2b31676a0131
   - enabled: 1
     path: Assets/Scenes/ZombieMayhem.unity
     guid: 2fa6791571ecd4d44933babd37c2db83
