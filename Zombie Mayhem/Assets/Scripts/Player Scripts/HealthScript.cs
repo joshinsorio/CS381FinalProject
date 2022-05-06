@@ -106,7 +106,7 @@ public class HealthScript : MonoBehaviour
             Cursor.visible = true;
             LevelManager.instance.GameOver();
             gameObject.SetActive(false);
-            Time.timeScale = 0f;
+
             //Invoke("RestartGame", 3f);
         }
         else
